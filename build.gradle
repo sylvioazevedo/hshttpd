@@ -1,0 +1,73 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.1'
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '4.0.1'
+    id 'groovy'
+    id 'java'
+}
+
+group 'br.com.sylvioazevedo'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+
+    // log4j
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+    // netty
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.30.Final'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': "${rootProject.name}.Launcher"
+    }
+}
+
+task deploy(dependsOn: shadowJar) {
+    doLast {
+
+        // check deploy dir
+        def deploy = new File("deploy")
+
+        deploy.deleteDir()
+        deploy.mkdir()
+
+        // copy jar
+        Files.copy(Paths.get("build${File.separator}libs${File.separator}${rootProject.name}-${version}-all.jar"), Paths.get("deploy${File.separator}${rootProject.name}-${version}-all.jar"))
+
+        // check launcher file
+        def launcher = new File("launch")
+
+        if(launcher) {
+           launcher.delete()
+        }
+
+        launcher << "#!/bin/bash\n"
+        launcher << "java -jar deploy${File.separator}${rootProject.name}-${version}-all.jar"
+    }
+}
+
