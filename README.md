@@ -31,4 +31,4 @@ Once started, you can interact with the app through the console stdin with the f
   * start - Restart the stopped server;
   * restart - Stop and then restart the server.
   
-In case of doubts or any problem, please send me a e-mail. <sylvioazevedo@gmail.com>
+In case of doubts or any problem, please send me an e-mail: <sylvioazevedo@gmail.com>
