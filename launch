@@ -1,2 +1,0 @@
-#!/bin/bash
-java -jar deploy/hshttpd-1.0-SNAPSHOT-all.jar

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app>
+    <appName>High speed HTTP daemon</appName>
+    <uuid>51c28669-2e36-40ec-9356-782dd717bd25</uuid>
+    <version>0.1-beta</version>
+    <httpd>
+        <root>www</root>
+    </httpd>
+</app>
