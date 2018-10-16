@@ -13,6 +13,7 @@ import io.netty.handler.ssl.SslProvider
 import io.netty.handler.ssl.util.SelfSignedCertificate
 import org.slf4j.LoggerFactory
 
+import javax.activation.MimetypesFileTypeMap
 import java.util.concurrent.ConcurrentHashMap
 
 class HttpServer {
@@ -75,12 +76,12 @@ class HttpServer {
 
         def key = (file.path as String) - (settings.httpd.root.text() as String)
 
-        def mime = URLConnection.guessContentTypeFromName file.name
-
         HttpServer.memory[key] = file.bytes
-        HttpServer.contentType[key] =  mime? mime: "text/html"
+        HttpServer.contentType[key] =  Util.findContentType file
         HttpServer.lastModified[key] = file.lastModified()
     }
+
+
 
     def start() {
 

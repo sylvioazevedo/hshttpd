@@ -67,6 +67,12 @@ task deploy(dependsOn: shadowJar) {
             include "*.xml"
         }
 
+        // copy html files
+        copy {
+            from fileTree("www")
+            into "deploy${File.separator}www"
+        }
+
         // check launcher file
         def launcher = new File("deploy${File.separator}launch")
 

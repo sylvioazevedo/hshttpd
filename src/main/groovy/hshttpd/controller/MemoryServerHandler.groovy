@@ -154,33 +154,6 @@ class MemoryServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
         }
     }
 
-//    private static sendPage(ctx, request, path) {
-//
-//        byte[] page = HttpServer.memory[path]
-//
-//        if (!page) {
-//            sendError ctx, NOT_FOUND
-//            return
-//        }
-//
-//        // prepare http response
-//        HttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.copiedBuffer(page))
-//        HttpUtil.setContentLength response, page.size()
-//
-//        // set content type
-//        setContentTypeHeader response, HttpServer.contentType[path]
-//        //setDateAndCacheHeaders response, file
-//
-//        // check keep-alive
-//        if (HttpUtil.isKeepAlive(request)) {
-//            response.headers().set HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE
-//        }
-//
-//        // Close the connection as soon as the error message is sent.
-//        ctx.writeAndFlush(response).addListener ChannelFutureListener.CLOSE
-//    }
-
-
     private static sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
 
         def response = new DefaultFullHttpResponse(HTTP_1_1, status, Unpooled.copiedBuffer("Failure: ${status}\r\n", CharsetUtil.UTF_8))
@@ -216,6 +189,14 @@ class MemoryServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
                 decoded[0] == '.' || decoded[decoded.length() - 1] == '.' ||
                 INSECURE_URI.matcher(decoded).matches()) {
             return null
+        }
+
+        if(decoded.indexOf("?")!=-1) {
+            decoded = decoded[0..decoded.indexOf("?")-1]
+        }
+
+        if(decoded.indexOf("@2x")) {
+            decoded = decoded.replaceAll("@2x", "")
         }
 
         // Convert to absolute path.
