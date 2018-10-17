@@ -8,7 +8,7 @@ First, I was restricted by a download policy at work and it was easier to write 
 
 I have based this code on the netty.io http file server implementation (https://netty.io/4.1/xref/io/netty/example/http/file/package-summary.html).
 
-It is a IntelliJ project, using Gradle manager. The server was developed in Groovy, please feel free to rewrite into the programming language you like the most.
+It is a IntelliJ project, using Gradle manager. The server was developed in Groovy, please feel free to rewrite it into whatever programming language you like the most.
 
 From git clone command:
 
