@@ -18,7 +18,7 @@ Just gradle it:
 
 > gradle shadowJar
 
-And then, invoke like any regular jar program:
+And then, invoke it like any regular jar program:
 
 > java -jar build/libs/hshttpd-1.0-SNAPSHOT-all.jar 
 
