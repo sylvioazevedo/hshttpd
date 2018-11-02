@@ -22,14 +22,16 @@ And then, invoke it like any regular jar program:
 
 > java -jar build/libs/hshttpd-1.0-SNAPSHOT-all.jar 
 
-This project is licensed as GPL v3.0
-
 Once started, you can interact with the app through the console stdin with the following commands:
 
-  * relaod - Reload the files in the directory [www] into memory;
+  * reload - Reload the files in the directory [www] into memory;
   * stop - Stop server;
   * start - Restart the stopped server;
   * restart - Stop and then restart the server;
   * exit - Exit smoothly the program.
   
 In case of doubts or any problem, please send me an e-mail: <sylvioazevedo@gmail.com>
+
+## License
+
+[GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)

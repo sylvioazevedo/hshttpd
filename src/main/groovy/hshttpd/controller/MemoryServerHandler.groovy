@@ -200,7 +200,7 @@ class MemoryServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
         }
 
         // Convert to absolute path.
-        decoded == "/"? "/index.html" : decoded
+        decoded == "${File.separatorChar}"? "${File.separatorChar}index.html" : decoded
     }
 
     /**
